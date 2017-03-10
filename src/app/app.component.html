@@ -1,3 +1,22 @@
-<h1>
-  {{title}}
-</h1>
+<div class="root">
+    <md-toolbar color="primary" class="navbar-fixed-top">
+
+        <button md-icon-button (click)="menuOpened = !menuOpened">
+            <md-icon>menu</md-icon>
+        </button>
+
+        <span>Keeper</span>
+    </md-toolbar>
+
+    <md-sidenav-container>
+        <md-sidenav mode="side" [opened]="menuOpened" class="mat-elevation-z3">
+            <md-nav-list>
+                <md-list-item *ngFor="let link of links" [routerLink]="link.link">
+                    <span>{{ link.name }}</span>
+                </md-list-item>
+            </md-nav-list>
+        </md-sidenav>
+
+        <router-outlet></router-outlet>
+    </md-sidenav-container>
+</div>
