@@ -1,3 +1,69 @@
-<md-card>
-    transaction works!
-</md-card>
+<div class="entry">
+    <div class="entry-container">
+        <h1>Transactions</h1>
+        <br>
+        <div *ngFor="let transactionDay of transactions | groupBy: 'made_on'">
+            <p><b>{{ transactionDay.key | date:'dd MMM y, EEE' }}</b></p>
+            <md-card>
+                <md-grid-list cols="3" rowHeight="60px">
+                    <template ngFor let-transaction [ngForOf]="transactionDay.value">
+                        <md-grid-tile (click)="transactionClick(transaction.transaction_id)">
+                            <md-list>
+                                <md-list-item>
+                                    <md-icon md-list-avatar fontSet="fa" fontIcon="fa-{{ transaction.category_icon }}"></md-icon>
+                                    <h3 md-line class="category-name">{{ transaction.category_name }}</h3>
+                                    <p md-line class="resource-name">
+                                        <template [ngIf]="transaction.out_resource_name">
+                                            <md-chip [style.background-color]="transaction.out_resource_color" [style.color]="getTextColorBasedOnBackground(transaction.out_resource_color)" selected="true">
+                                                <template [ngIf]="transaction.out_resource_icon">
+                                                    <i *ngIf="transaction.out_resource_icon.indexOf('http') === -1" class="fa fa-{{transaction.out_resource_icon}}"></i>
+                                                    <img *ngIf="transaction.out_resource_icon.indexOf('http') !== -1" height=12 width=12 [attr.src]="transaction.out_resource_icon" />
+                                                </template>
+                                                {{ transaction.out_resource_name }}
+                                            </md-chip>
+                                        </template>
+                                        <i *ngIf="transaction.out_resource_name && transaction.in_resource_name" class="fa fa-long-arrow-right"></i>
+                                        <template [ngIf]="transaction.in_resource_name">
+                                            <md-chip [style.background-color]="transaction.in_resource_color" [style.color]="getTextColorBasedOnBackground(transaction.in_resource_color)" selected="true">
+                                                <template [ngIf]="transaction.in_resource_icon">
+                                                    <i *ngIf="transaction.in_resource_icon.indexOf('http') === -1" class="fa fa-{{transaction.in_resource_icon}}"></i>
+                                                    <img *ngIf="transaction.in_resource_icon.indexOf('http') !== -1" height=12 width=12 [attr.src]="transaction.in_resource_icon" />
+                                                </template>
+                                                {{ transaction.in_resource_name }}
+                                            </md-chip>
+                                        </template>
+                                    </p>
+                                </md-list-item>
+                            </md-list>
+                        </md-grid-tile>
+                        <md-grid-tile (click)="transactionClick(transaction.transaction_id)">
+                            <md-list>
+                                <md-list-item>
+                                    <md-chip-list md-line>
+                                        <md-chip *ngFor="let tag of transaction.tags">{{ tag.tag_name }}</md-chip>
+                                    </md-chip-list>
+                                    <p md-line class="description">{{ transaction.description }}</p>
+                                </md-list-item>
+                            </md-list>
+                        </md-grid-tile>
+                        <md-grid-tile (click)="transactionClick(transaction.transaction_id)">
+                            <md-list style="margin-left: auto; text-align: right;">
+                                <md-list-item>
+                                    <p md-line>
+                                        <span class="currency_name text-muted">{{ transaction.in_currency_name }}</span>
+                                        <span class="amount" style="color: green">{{ transaction.in_amount | number:'1.2-2'  }}</span>
+                                    </p>
+                                    <p md-line>
+                                        <span class="currency_name text-muted">{{ transaction.out_currency_name }}</span>
+                                        <span class="amount" style="color: red">{{ transaction.out_amount | number:'1.2-2'  }}</span>
+                                    </p>
+                                </md-list-item>
+                            </md-list>
+                        </md-grid-tile>
+                    </template>
+                </md-grid-list>
+            </md-card>
+            <br>
+        </div>
+    </div>
+</div>

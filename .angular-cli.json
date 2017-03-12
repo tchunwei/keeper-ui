@@ -21,9 +21,14 @@
       "styles": [
         "assets/css/styles.css",
         "assets/css/theme.scss",
-        "assets/css/material_icon.css"
+        "assets/css/material_icon.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/css/font-awesome.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

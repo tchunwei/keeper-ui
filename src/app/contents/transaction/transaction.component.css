@@ -1,0 +1,54 @@
+.entry {
+    display: flex;
+    justify-content: center;
+}
+
+.entry-container {
+    margin: 0 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+md-card {
+    padding: 0px 10px;
+}
+
+md-list {
+    padding-top: 0px;
+}
+
+.category-name {
+    margin-bottom: 1px !important;
+}
+
+.resource-name {
+    font-size: 12px !important;
+}
+
+.description {
+    font-size: 14px !important;
+    font-style: italic;
+}
+
+md-icon {
+    font-size: 36px;
+    color:#444;
+}
+
+md-chip {
+    padding: 1px 8px !important;
+    margin-right: 3px;
+}
+
+.currency_name {
+    font-size: 10px !important;
+}
+
+.amount {
+    font-size: 18px !important;
+}
+
+md-grid-tile >>> .mat-figure {
+    border-bottom: 1px solid #ddd;
+    justify-content: flex-start;
+}
